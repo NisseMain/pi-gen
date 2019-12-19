@@ -1,0 +1,5 @@
+IMG_NAME='Nisse'
+HOSTNAME='nisse.local'
+KEYBOARD_KEYMAP='gb'
+FIRST_USER_NAME='nisse'
+FIRST_USER_PASS='nisse12'
