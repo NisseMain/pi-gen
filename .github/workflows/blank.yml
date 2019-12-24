@@ -1,0 +1,22 @@
+name: CI
+
+on: [push]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v1
+    - name: Install Mega command-line
+      run: |
+        curl -fsSL https://mega.nz/keys/MEGA_signing.key | sudo apt-key add -
+        add-apt-repository 'deb https://mega.nz/linux/MEGAsync/xUbuntu_18.04/ ./'
+        sudo apt update
+        sudo apt install megacmd
+    - name: Build Image
+      run: |
+        ./build-docker.sh
+        mega-login admin@nisse.global xxxx
+        mega-put image_$(date +%Y-%m-%d)-Nisse-full.zip 
