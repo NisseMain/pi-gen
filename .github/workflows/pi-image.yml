@@ -1,4 +1,4 @@
-name: CI
+name: PI-Image
 
 on: [push]
 
@@ -11,12 +11,12 @@ jobs:
     - uses: actions/checkout@v1
     - name: Install Mega command-line
       run: |
-        curl -fsSL https://mega.nz/keys/MEGA_signing.key | sudo apt-key add -
-        add-apt-repository 'deb https://mega.nz/linux/MEGAsync/xUbuntu_18.04/ ./'
+        sudo curl -fsSL https://mega.nz/keys/MEGA_signing.key | sudo apt-key add -
+        sudo add-apt-repository 'deb https://mega.nz/linux/MEGAsync/xUbuntu_18.04/ ./'
         sudo apt update
         sudo apt install megacmd
     - name: Build Image
       run: |
         ./build-docker.sh
-        mega-login admin@nisse.global xxxx
+        mega-login admin@nisse.global ${{ secrets.mega }}
         mega-put image_$(date +%Y-%m-%d)-Nisse-full.zip 
